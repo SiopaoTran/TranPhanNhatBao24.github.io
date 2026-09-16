@@ -1,30 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Youth in Focus</title>
-<style>
-  body { font-family: Arial, sans-serif; margin: 0; }
-  header { display: flex; justify-content: space-between; padding: 20px; }
-  .hero { padding: 40px 20px; text-align: center; }
-  .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; padding: 20px; }
-  .card { border: 1px solid #ccc; border-radius: 8px; padding: 16px; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Youth in Focus</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; color:#111; }
+    header { display: flex; justify-content: space-between; align-items:center; padding: 20px; }
+    nav a { color: #333; text-decoration: none; margin-left: 20px; }
+    .btn { background: #993C1D; color: white; padding: 10px 20px; border-radius: 20px; text-decoration: none; }
+    .btn-outline { border: 1px solid #999; color: #333; padding: 10px 20px; border-radius: 20px; text-decoration: none; }
+    .badge { background: #EAF3DE; color: #27500A; padding: 4px 12px; border-radius: 12px; font-size: 13px; display: inline-block; margin-bottom: 12px; }
+    .hero { padding: 40px 20px; text-align: center; }
+    .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; padding: 20px; }
+    .card { border: 1px solid #ccc; border-radius: 8px; padding: 16px; background:#fff; }
+    @media (max-width:900px){ .cards{grid-template-columns:repeat(2,1fr)} }
+    @media (max-width:520px){ .cards{grid-template-columns:1fr} header{flex-direction:column;gap:10px} }
+  </style>
 </head>
 <body>
   <header>
-    <div>Youth in Focus</div>
-    <nav>Facilities | Youth Council | Support | Social</nav>
+    <div><strong>Youth in Focus</strong></div>
+    <nav aria-label="Main navigation">
+      <a href="#facilities">Facilities</a>
+      <a href="#council">Youth Council</a>
+      <a href="#support">Support</a>
+      <a href="#social">Social</a>
+      <a href="#getinvolved" class="btn">Get involved</a>
+    </nav>
   </header>
-  <section class="hero">
-    <h1>Your heading goes here</h1>
+
+  <section class="hero" aria-labelledby="hero-heading">
+    <span class="badge">For young people across Wanneroo</span>
+    <h1 id="hero-heading">Your heading goes here</h1>
     <p>Your subtext goes here</p>
+    <p>
+      <a href="#getinvolved" class="btn">Get involved</a>
+      <a href="#say" class="btn-outline">Have your say</a>
+    </p>
   </section>
-  <section class="cards">
-    <div class="card">Card 1</div>
-    <div class="card">Card 2</div>
-    <div class="card">Card 3</div>
-    <div class="card">Card 4</div>
+
+  <section class="cards" aria-label="Main features">
+    <article class="card" id="facilities">
+      <h3>Safe Spaces</h3>
+      <p>Drop-in centers and study rooms for youth to hang out and learn.</p>
+    </article>
+    <article class="card" id="council">
+      <h3>Youth Council</h3>
+      <p>Get involved in planning events and shaping local programs.</p>
+    </article>
+    <article class="card" id="support">
+      <h3>Support Services</h3>
+      <p>Access mentoring, counselling referrals, and practical help.</p>
+    </article>
+    <article class="card" id="social">
+      <h3>Social Events</h3>
+      <p>Regular meetups, sports, and creative workshops to connect.</p>
+    </article>
   </section>
+
+  <section id="getinvolved" style="padding:24px 20px;background:#f4f4f4;border-top:4px solid #993C1D">
+    <h2>Get involved</h2>
+    <p>Want to help run events or volunteer? Email us to join the youth network.</p>
+    <p>
+      <a href="mailto:hello@youthinfocus.org" class="btn" style="background:#993C1D;color:#fff;padding:10px 18px;border-radius:20px;text-decoration:none">Email to join</a>
+      <a href="#say" class="btn-outline" style="margin-left:12px;padding:10px 18px;border-radius:20px;text-decoration:none">Have your say</a>
+    </p>
+  </section>
+
+  <footer style="background:#111;color:#fff;padding:18px 20px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center">
+    <div style="font-size:0.95rem">Contact us: hello@youthinfocus.org | 0400 000 000</div>
+    <div style="margin-top:8px">
+      <a href="#" style="color:#fff;text-decoration:none;margin-left:12px">Facebook</a>
+      <a href="#" style="color:#fff;text-decoration:none;margin-left:12px">Instagram</a>
+    </div>
+  </footer>
+
 </body>
 </html>
+
