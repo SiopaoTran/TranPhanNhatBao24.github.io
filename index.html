@@ -1,26 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Youth in Focus</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; color:#111; }
-    header { display: flex; justify-content: space-between; align-items:center; padding: 20px; }
-    nav a { color: #333; text-decoration: none; margin-left: 20px; }
-    .btn { background: #993C1D; color: white; padding: 10px 20px; border-radius: 20px; text-decoration: none; }
-    .btn-outline { border: 1px solid #999; color: #333; padding: 10px 20px; border-radius: 20px; text-decoration: none; }
-    .badge { background: #EAF3DE; color: #27500A; padding: 4px 12px; border-radius: 12px; font-size: 13px; display: inline-block; margin-bottom: 12px; }
-    .hero { padding: 40px 20px; text-align: center; }
-    .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; padding: 20px; }
-    .card { border: 1px solid #ccc; border-radius: 8px; padding: 16px; background:#fff; }
-    @media (max-width:900px){ .cards{grid-template-columns:repeat(2,1fr)} }
-    @media (max-width:520px){ .cards{grid-template-columns:1fr} header{flex-direction:column;gap:10px} }
+    :root{
+      --brand:#993C1D;
+      --brand-dark:#7A2E1A;
+      --muted:#666;
+      --card-bg:#fff;
+      --page-bg:#fbfdfb;
+    }
+    html,body{height:100%;margin:0}
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      color: #111;
+      background: var(--page-bg);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 20px;
+      gap:12px;
+      background: #ffffffcc;
+      backdrop-filter: blur(4px);
+      border-bottom: 1px solid #eee;
+    }
+
+    header .brand {
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    header img { height:44px; width:auto; display:block; }
+    header .brand strong { font-size:1.05rem; letter-spacing:0.2px; }
+
+    nav[aria-label="Main navigation"]{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+    nav a {
+      color: #333;
+      text-decoration: none;
+      margin-left: 8px;
+      padding:8px 10px;
+      border-radius:8px;
+      font-weight:600;
+      font-size:0.95rem;
+    }
+    nav a:hover{background:#f2f2f2}
+
+    .btn {
+      background: var(--brand);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      text-decoration: none;
+      display:inline-block;
+      font-weight:700;
+    }
+    .btn:hover{background:var(--brand-dark)}
+    .btn-outline {
+      border: 1px solid #999;
+      color: #333;
+      padding: 8px 16px;
+      border-radius: 20px;
+      text-decoration: none;
+      display:inline-block;
+      background:transparent;
+      font-weight:700;
+    }
+
+    .hero {
+      padding: 48px 20px;
+      text-align: center;
+      background: linear-gradient(180deg,#ffffff 0%, #f7fbf6 100%);
+    }
+    .badge {
+      background: #EAF3DE;
+      color: #27500A;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      display: inline-block;
+      margin-bottom: 12px;
+      font-weight:700;
+    }
+    .hero h1 { font-size:2rem; margin:10px 0 8px; }
+    .hero p { color:var(--muted); max-width:760px; margin:0 auto 16px; }
+
+    .events {
+      background:#fffbe6;
+      padding:12px 20px;
+      border-top:3px solid #E6E6E6;
+      display:flex;
+      gap:12px;
+      overflow:auto;
+      align-items:stretch;
+    }
+    .events .event {
+      min-width:200px;
+      background:#fff;
+      padding:12px;
+      border-radius:8px;
+      border:1px solid #eee;
+      box-shadow:0 4px 10px rgba(15,15,15,0.03);
+    }
+    .events .date { font-weight:700; color:#3B6D11; margin-bottom:6px; }
+    .events .title { font-weight:700; margin-bottom:4px; }
+
+    main { padding: 20px; max-width:1200px; margin:0 auto; }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      padding: 8px 0 40px;
+    }
+    .card {
+      border: 1px solid #e6e6e6;
+      border-radius: 12px;
+      padding: 16px;
+      background: var(--card-bg);
+      box-shadow: 0 6px 18px rgba(15,15,15,0.06);
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .card:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(15,15,15,0.08); }
+    .card h3 { margin:0 0 8px; font-size:1.05rem; }
+    .card p { color:var(--muted); margin:0 0 12px; }
+
+    .card .icon {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:40px;
+      height:40px;
+      border-radius:8px;
+      font-weight:700;
+      margin-right:10px;
+      flex-shrink:0;
+    }
+
+    footer {
+      background:#111;
+      color:#fff;
+      padding:18px 20px;
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      margin-top:40px;
+    }
+    footer a { color:#fff; text-decoration:none; margin-left:12px; font-weight:600; }
+
+    /* responsive */
+    @media (max-width:900px){
+      .cards{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:520px){
+      .cards{grid-template-columns:1fr}
+      header{flex-direction:column;gap:10px;align-items:stretch}
+      nav{justify-content:center}
+      .hero h1{font-size:1.6rem}
+    }
   </style>
 </head>
 <body>
   <header>
-    <div><strong>Youth in Focus</strong></div>
+    <div class="brand">
+      <!-- Upload a small logo file named logo.png to the repo root or replace src with a hosted image URL -->
+      <img src="logo.png" alt="Youth in Focus logo" />
+      <strong>Youth in Focus</strong>
+    </div>
+
     <nav aria-label="Main navigation">
       <a href="#facilities">Facilities</a>
       <a href="#council">Youth Council</a>
@@ -32,50 +194,92 @@
 
   <section class="hero" aria-labelledby="hero-heading">
     <span class="badge">For young people across Wanneroo</span>
-    <h1 id="hero-heading">Your heading goes here</h1>
-    <p>Your subtext goes here</p>
+    <h1 id="hero-heading">Your city. Your voice. Your space.</h1>
+    <p>Facilities, youth council activities, support services and events for our multicultural community — all in one place.</p>
     <p>
       <a href="#getinvolved" class="btn">Get involved</a>
       <a href="#say" class="btn-outline">Have your say</a>
     </p>
   </section>
 
-  <section class="cards" aria-label="Main features">
-    <article class="card" id="facilities">
-      <h3>Safe Spaces</h3>
-      <p>Drop-in centers and study rooms for youth to hang out and learn.</p>
-    </article>
-    <article class="card" id="council">
-      <h3>Youth Council</h3>
-      <p>Get involved in planning events and shaping local programs.</p>
-    </article>
-    <article class="card" id="support">
-      <h3>Support Services</h3>
-      <p>Access mentoring, counselling referrals, and practical help.</p>
-    </article>
-    <article class="card" id="social">
-      <h3>Social Events</h3>
-      <p>Regular meetups, sports, and creative workshops to connect.</p>
-    </article>
+  <!-- Events strip (A/B/C) -->
+  <section class="events" aria-label="Upcoming events">
+    <div class="event">
+      <div class="date">12 Oct</div>
+      <div class="title">Community Clean Up</div>
+      <div class="desc" style="color:var(--muted)">Meet at the park, 9am.</div>
+    </div>
+    <div class="event">
+      <div class="date">19 Oct</div>
+      <div class="title">Youth Council Meeting</div>
+      <div class="desc" style="color:var(--muted)">Share ideas, 5pm community hall.</div>
+    </div>
+    <div class="event">
+      <div class="date">26 Oct</div>
+      <div class="title">Skills Workshop</div>
+      <div class="desc" style="color:var(--muted)">Resume and interview tips, 3pm.</div>
+    </div>
   </section>
 
-  <section id="getinvolved" style="padding:24px 20px;background:#f4f4f4;border-top:4px solid #993C1D">
-    <h2>Get involved</h2>
-    <p>Want to help run events or volunteer? Email us to join the youth network.</p>
-    <p>
-      <a href="mailto:hello@youthinfocus.org" class="btn" style="background:#993C1D;color:#fff;padding:10px 18px;border-radius:20px;text-decoration:none">Email to join</a>
-      <a href="#say" class="btn-outline" style="margin-left:12px;padding:10px 18px;border-radius:20px;text-decoration:none">Have your say</a>
-    </p>
+  <main>
+    <!-- Enhanced cards (B) -->
+    <section class="cards" aria-label="Main features">
+      <article class="card" id="facilities">
+        <div style="display:flex;align-items:center;margin-bottom:10px">
+          <div class="icon" style="background:#EAF3DE;color:#27500A">🏠</div>
+          <h3 style="margin:0">Safe Spaces</h3>
+        </div>
+        <p>Drop-in centres and study rooms for youth to hang out and learn.</p>
+        <a href="#facilities-details" style="text-decoration:none;color:var(--brand);font-weight:700">Learn more →</a>
+      </article>
+
+      <article class="card" id="council">
+        <div style="display:flex;align-items:center;margin-bottom:10px">
+          <div class="icon" style="background:#FDEBD0;color:#7A3A1F">🗳️</div>
+          <h3 style="margin:0">Youth Council</h3>
+        </div>
+        <p>Get involved in planning events and shaping local programs.</p>
+        <a href="#council-details" style="text-decoration:none;color:var(--brand);font-weight:700">Learn more →</a>
+      </article>
+
+      <article class="card" id="support">
+        <div style="display:flex;align-items:center;margin-bottom:10px">
+          <div class="icon" style="background:#DDEBF7;color:#0B4F6C">💬</div>
+          <h3 style="margin:0">Support Services</h3>
+        </div>
+        <p>Access mentoring, counselling referrals, and practical help.</p>
+        <a href="#support-details" style="text-decoration:none;color:var(--brand);font-weight:700">Learn more →</a>
+      </article>
+
+      <article class="card" id="social">
+        <div style="display:flex;align-items:center;margin-bottom:10px">
+          <div class="icon" style="background:#FCE8F3;color:#6A1B4D">🎉</div>
+          <h3 style="margin:0">Social Events</h3>
+        </div>
+        <p>Regular meetups, sports, and creative workshops to connect.</p>
+        <a href="#social-details" style="text-decoration:none;color:var(--brand);font-weight:700">Learn more →</a>
+      </article>
+    </section>
+  </main>
+
+  <!-- Get involved + footer (C) -->
+  <section id="getinvolved" style="padding:24px 20px;background:#f4f4f4;border-top:4px solid var(--brand);margin-top:0">
+    <div style="max-width:1000px;margin:0 auto">
+      <h2>Get involved</h2>
+      <p>Want to help run events or volunteer? Email us to join the youth network.</p>
+      <p>
+        <a href="mailto:hello@youthinfocus.org" class="btn" style="background:var(--brand);color:#fff;padding:10px 18px;border-radius:20px;text-decoration:none">Email to join</a>
+        <a href="#say" class="btn-outline" style="margin-left:12px;padding:10px 18px;border-radius:20px;text-decoration:none">Have your say</a>
+      </p>
+    </div>
   </section>
 
-  <footer style="background:#111;color:#fff;padding:18px 20px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center">
-    <div style="font-size:0.95rem">Contact us: hello@youthinfocus.org | 0400 000 000</div>
-    <div style="margin-top:8px">
-      <a href="#" style="color:#fff;text-decoration:none;margin-left:12px">Facebook</a>
-      <a href="#" style="color:#fff;text-decoration:none;margin-left:12px">Instagram</a>
+  <footer>
+    <div style="font-size:0.95rem">Contact us: <a href="mailto:hello@youthinfocus.org" style="color:#fff;text-decoration:underline">hello@youthinfocus.org</a> | 0400 000 000</div>
+    <div>
+      <a href="#" aria-label="Facebook">Facebook</a>
+      <a href="#" aria-label="Instagram">Instagram</a>
     </div>
   </footer>
-
 </body>
 </html>
-
